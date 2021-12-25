@@ -1,0 +1,20 @@
+<div class="d-flex flex-row bd-highlight mb-3">
+  <div class="form-froup row" style="width: 75%">
+    <label class="col-sm-6">Fluid Level </label>
+    <div class="col-sm-6 data-container">
+      <select class="form-control" [(ngModel)]="FluidLevel">
+        <option value="LOW">LOW</option>
+        <option value="HALF">HALF</option>
+        <option value="FULL">FULL</option>
+      </select>
+    </div>
+    <label class="col-sm-6">Engine Temperature: </label>
+    <div class="col-sm-6 data-container">
+      <input type=number step=1 class="form-control" [(ngModel)]="EngineTemperature">
+    </div>
+    <label class="col-sm-6">Tire Pressure: </label>
+    <div class="col-sm-6 data-container">
+      <input type=number step=1 class="form-control" [(ngModel)]="TirePressure">
+    </div>
+  </div>
+</div>

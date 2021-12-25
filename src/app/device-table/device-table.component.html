@@ -1,0 +1,50 @@
+<button type="button" class="btn btn-primary float-right m-2" data-toggle="modal" data-target="#deviceDetail"
+  data-backdrop="static" data-keyboard="false" *ngIf="isSimulator" (click)="addClick()">
+  Add New Device
+</button>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Track ID</th>
+      <th>Device Type</th>
+      <th>Location (Latitude, longtitude)</th>
+      <th>More</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let device of currDeviceList">
+      <td>{{device.track_id}}</td>
+      <td>{{device.device_type}}</td>
+      <td>{{device.loc_lat}} , {{device.loc_lng}}</td>
+      <td>
+        <button class="detail-button" (click)="detailClick(device.track_id)" data-toggle="modal"
+          data-target="#deviceDetail">
+          Detail
+        </button>
+        <button class="detail-button" (click)="editClick(device.track_id)" data-toggle="modal"
+          data-target="#deviceDetail" *ngIf='isSimulator'>
+          Update
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="modal fade" id="deviceDetail" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">{{modalTitle}}</h3>
+        <button type="button" class="close" data-dismiss="modal" (click)="closeClick()">
+          <span>&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-device-detail-modal [deviceStateData]='detailedDeviceData' *ngIf="reviewDetailModal&&modalRelease"></app-device-detail-modal>
+        <app-device-info-edit-modal [deviceStateData]='detailedDeviceData' *ngIf='(editDeviceModal||addDeviceModal)&&modalRelease' [newDevice]='addDeviceModal' (dataTransferComplete)='notifyDataTransferComplete($event)'></app-device-info-edit-modal>
+        <span *ngIf='notifiedModal'>You can close this window and continue.</span>
+      </div>
+    </div>
+  </div>
+</div>
+

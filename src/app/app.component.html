@@ -1,0 +1,15 @@
+<div class="topnav">
+  <a class="title" routerLink="" (click)='showInstruction()'>ACME Platform</a>
+  <a routerLink="monitor" (click)='hideInstruction()'>Monitor</a>
+  <a routerLink="simulator" (click)='hideInstruction()'>Simulator</a>
+</div>
+<div class="instruction" *ngIf='showInsturction'>
+  <h3>This is ACME platform, please click either Monitor or Simulator on the top of navigation bar to continue</h3>
+  <h3>You can also open two browser windows with one of each.</h3>
+  <h3>Please to extra refresh Monitor page to make sure it has the connection with websocket to see the real time
+    udpate</h3>
+  <h3>Thank you for test it out!</h3>
+</div>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

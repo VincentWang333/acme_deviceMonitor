@@ -1,0 +1,40 @@
+<div class="d-flex flex-row bd-highlight mb-3">
+  <div class="form-froup row" style="width: 75%">
+    <label class="col-sm-6 data-lable">Track ID:</label>
+    <div class="col-sm-6 data-field">
+      {{deviceStateData.track_id}}
+    </div>
+    <label class="col-sm-6 data-lable">Device Type:</label>
+    <div class="col-sm-6 data-field">
+      {{deviceStateData.device_type}}
+    </div>
+    <label class="col-sm-6 data-lable">Location (Latitude, longtitude): </label>
+    <div class="col-sm-6 data-field">
+      {{deviceStateData.loc_lat}}, {{deviceStateData.loc_lng}}
+    </div>
+  </div>
+  <div class="form-froup row car-data" style="width: 75%" *ngIf="deviceIsCar()">
+    <label class="col-sm-6 data-lable">Fluid Level: </label>
+    <div class="col-sm-6 data-field">
+      {{deviceStateData.fluid_level}}
+    </div>
+    <label class="col-sm-6 data-lable">Engine Temperature: </label>
+    <div class="col-sm-6 data-field">
+      {{deviceStateData.engine_temp}}
+    </div>
+    <label class="col-sm-6 data-lable">Trie Pressure: </label>
+    <div class="col-sm-6 data-field">
+      {{deviceStateData.tire_pressure}}
+    </div>
+  </div>
+  <div class="form-froup row car-data" style="width: 75%" *ngIf="deviceIsFridge()">
+    <label class="col-sm-6 data-lable">Ice Level: </label>
+    <div class="col-sm-6 data-field">
+      {{deviceStateData.ice_level}}
+    </div>
+    <label class="col-sm-6 data-lable">Water Leak: </label>
+    <div class="col-sm-6 data-field">
+      {{deviceStateData.water_leak}}
+    </div>
+  </div>
+</div>
