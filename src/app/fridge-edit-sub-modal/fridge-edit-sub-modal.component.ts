@@ -15,8 +15,8 @@ export class FridgeEditSubModalComponent implements OnInit {
   @Output() sendDataBackToMainModal = new EventEmitter<any>();
   constructor() { }
 
-  WaterLeak:String = "";
-  IceLevel:String = "";
+  WaterLeak:string = "";
+  IceLevel:string = "";
 
   ngOnInit(): void {
     if(!this.newDevice){

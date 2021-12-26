@@ -12,16 +12,17 @@ export class DeviceInfoEditModalComponent implements OnInit {
   constructor(private service:SharedService) { }
   @Input() newDevice:boolean = false;
   @Input() deviceStateData:any;
-  @Output() dataTransferComplete = new EventEmitter<String>();
+  @Output() dataTransferComplete = new EventEmitter<string>();
   
-  DeviceID:String = "";
-  DeviceType:String = "";
+  DeviceID:string = "";
+  DeviceType:string = "";
   DeviceLocationLongtitude:number = 0;
   DeviceLocationLatitude:number = 0;
   errorField:boolean = false;
+  errorFieldMessage: string = ""
 
   deviceTypeList = ["CAR", "FRIDGE"]
-  newDeviceTypeTable = new Map<String, boolean>([
+  newDeviceTypeTable = new Map<string, boolean>([
     ["CAR", false], 
     ["FRIDGE", false]
   ]);
@@ -54,7 +55,7 @@ export class DeviceInfoEditModalComponent implements OnInit {
     return this.newDeviceTypeTable.get('FRIDGE');
   }
 
-  onChange(value:String){
+  onChange(value:string){
     this.initDeviceTypeTable();
     switch(value){
       case "CAR":
@@ -73,10 +74,7 @@ export class DeviceInfoEditModalComponent implements OnInit {
   }
 
   addClick(){
-    this.errorField = false;
-    if (this.DeviceType.length < 1){
-      this.errorField = true;
-    } else {
+    if (this.dataFieldErrorCheck()){
       this.emitEventToSupModal();
     }
   }
@@ -86,7 +84,9 @@ export class DeviceInfoEditModalComponent implements OnInit {
   }
 
   updateClick(){
-    this.emitEventToSupModal();
+    if (this.dataFieldErrorCheck()){
+      this.emitEventToSupModal();
+    }
   }
 
   deleteClick(){
@@ -96,6 +96,7 @@ export class DeviceInfoEditModalComponent implements OnInit {
       },
       (error:any) => {
         this.errorField = true;
+        this.errorFieldMessage = "Failed to delete device from database, Please try again later"
       }
     )
   }
@@ -123,18 +124,44 @@ export class DeviceInfoEditModalComponent implements OnInit {
       },
       (error:any) => {
         this.errorField = true;
+        this.errorFieldMessage = "Failed to add new device to database, Please try again later"
       }
     );
   }
 
-  updateDeviceData(deviceID: String, deviceStateData:any){
+  updateDeviceData(deviceID: string, deviceStateData:any){
     this.service.updateDeviceState(deviceID, deviceStateData).subscribe(
       (res:any) => {
         this.dataTransferComplete.emit("Device State Updated");
       },
       (error:any) => {
         this.errorField = true;
+        this.errorFieldMessage = "Failed to update new device to database, Please try again later"
       }
     )
   }
+
+  dataFieldErrorCheck():boolean{
+    this.errorField = false;
+    this.errorFieldMessage = "";
+    if (!this.deviceTypeList.includes(this.DeviceType)){
+      this.errorField = true;
+      this.errorFieldMessage = "Error! Please select a valid type device"
+      return false;
+    } else if (this.DeviceLocationLatitude > 999 || this.DeviceLocationLatitude < -999 || this.DeviceLocationLongtitude > 999 || this.DeviceLocationLongtitude < -999){
+      this.errorField = true;
+      this.errorFieldMessage = "Error! Integer part for location value has no more than 3 digits"
+      return false;
+    } else if (this.countDecimals(this.DeviceLocationLatitude) > 6 || this.countDecimals(this.DeviceLocationLongtitude) > 6){
+      this.errorField = true;
+      this.errorFieldMessage = "Error! Decimal part for location value has no more than 6 digits"
+      return false;
+    }
+    return true; 
+  }
+
+  countDecimals (value:number) {
+    if(Math.floor(value) === value) return 0;
+    return value.toString().split(".")[1].length || 0; 
+}
 }

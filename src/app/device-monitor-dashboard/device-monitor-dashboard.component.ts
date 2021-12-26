@@ -7,7 +7,7 @@ import { Subject } from 'rxjs';
   styleUrls: ['./device-monitor-dashboard.component.scss']
 })
 export class DeviceMonitorDashboardComponent implements OnInit {
-  eventsSubject: Subject<String> = new Subject<String>();
+  eventsSubject: Subject<string> = new Subject<string>();
   
   constructor() {}
   

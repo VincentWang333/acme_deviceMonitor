@@ -31,11 +31,11 @@ export class SharedService {
     return this.http.post(`${baseUrl}/devices/`, data);
   }
 
-  deleteDevice(track_id:String){
+  deleteDevice(track_id:string){
     return this.http.delete(`${baseUrl}/devices/${track_id}`);
   }
 
-  updateDeviceState(track_id:String, data:any){
+  updateDeviceState(track_id:string, data:any){
     return this.http.patch(`${baseUrl}/devices/${track_id}`, data);
   }
 

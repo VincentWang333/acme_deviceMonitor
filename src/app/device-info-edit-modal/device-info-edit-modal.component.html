@@ -12,12 +12,12 @@
         </option>
       </select>
     </div>
-    <label class="col-sm-6">Location Latitude: </label>
+    <label class="col-sm-6">Location Latitude (000.000000): </label>
     <div class="col-sm-6 data-container">
       <input type=number step=0.000001 class="form-control" [(ngModel)]="DeviceLocationLatitude">
     </div>
 
-    <label class="col-sm-6">Location Longtitude: </label>
+    <label class="col-sm-6">Location Longtitude (000.000000): </label>
     <div class="col-sm-6 data-container">
       <input type=number step=0.000001 class="form-control" [(ngModel)]="DeviceLocationLongtitude">
     </div>
@@ -27,7 +27,7 @@
 </app-car-edit-sub-modal>
 <app-fridge-edit-sub-modal *ngIf="(newDeviceIsFridge() && newDevice) || (!newDevice && editDeviceIsFridge())" [events]="eventsSubject.asObservable()" [newDevice]='newDevice' [deviceStateData]='deviceStateData' (sendDataBackToMainModal)='sendCollectedData($event)'>
 </app-fridge-edit-sub-modal>
-<div class="data-error" *ngIf="errorField">Ooooops, your data exist error, Please check and try again</div>
+<div class="data-error" *ngIf="errorField">{{errorFieldMessage}}</div>
 
 <button class="btn btn-primary modal-button" *ngIf='newDevice' (click)="addClick()">
   Add

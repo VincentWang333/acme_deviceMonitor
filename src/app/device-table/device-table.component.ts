@@ -16,15 +16,15 @@ export class DeviceTableComponent implements OnInit {
   currDeviceList:any = [];
   detailedDeviceData:any;
   @Input() isSimulator:boolean = false;
-  @Input() selectedType: String = ""
-  @Input() events!: Observable<String>;
-  modalTitle: String = "";
+  @Input() selectedType: string = ""
+  @Input() events!: Observable<string>;
+  modalTitle: string = "";
   modalRelease: boolean = false;
   reviewDetailModal:boolean = false;
   editDeviceModal:boolean = false;
   addDeviceModal:boolean = false;
   notifiedModal:boolean = false;
-  currentFilterType:String = "ALL";
+  currentFilterType:string = "ALL";
   
   ngOnInit(): void {
     this.getDeviceList();
@@ -34,7 +34,7 @@ export class DeviceTableComponent implements OnInit {
         this.refreshDeviceList()
       }
     }
-    this.eventsSubscription = this.events.subscribe((data:String) => {
+    this.eventsSubscription = this.events.subscribe((data:string) => {
       this.currentFilterType = data;
         this.getFileterDeviceList()
     });
@@ -127,7 +127,7 @@ export class DeviceTableComponent implements OnInit {
     )
   }
 
-  notifyDataTransferComplete(message:String){
+  notifyDataTransferComplete(message:string){
     this.closeClick();
     this.modalTitle = message;
     this.notifiedModal = true;

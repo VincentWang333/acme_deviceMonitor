@@ -13,7 +13,7 @@ export class CarEditSubModalComponent implements OnInit {
   @Input() newDevice: boolean = false;
   @Input() deviceStateData: any;
   @Output() sendDataBackToMainModal = new EventEmitter<any>();
-  FluidLevel:String = "";
+  FluidLevel:string = "";
   EngineTemperature: number = 0;
   TirePressure: number = 0;
 

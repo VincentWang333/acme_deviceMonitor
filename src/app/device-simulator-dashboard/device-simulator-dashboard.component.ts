@@ -7,7 +7,7 @@ import { Subject } from 'rxjs';
   styleUrls: ['./device-simulator-dashboard.component.scss']
 })
 export class DeviceSimulatorDashboardComponent implements OnInit {
-  eventsSubject: Subject<String> = new Subject<String>();
+  eventsSubject: Subject<string> = new Subject<string>();
 
   constructor() {}
   
